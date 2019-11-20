@@ -34,7 +34,7 @@ type Action = {
   readonly type: string;
   readonly payload: {
     readonly price: number;
-    readonly feature: { readonly id: number; readonly name: string; readonly price: number };
+    readonly name: string;
     readonly id: number;
   };
 };
@@ -47,7 +47,7 @@ export const featureReducer = (state: State = initialState, action: Action): Sta
         additionalPrice: state.additionalPrice + action.payload.price,
         car: {
           ...state.car,
-          features: [...state.car.features, action.payload.feature]
+          features: [...state.car.features, action.payload]
         },
         additionalFeatures: state.additionalFeatures.filter(
           feature => feature.id !== action.payload.id
@@ -61,7 +61,7 @@ export const featureReducer = (state: State = initialState, action: Action): Sta
           ...state.car,
           features: state.car.features.filter(feature => feature.id !== action.payload.id)
         },
-        additionalFeatures: [...state.additionalFeatures, action.payload.feature]
+        additionalFeatures: [...state.additionalFeatures, action.payload]
       };
     default:
       return state;

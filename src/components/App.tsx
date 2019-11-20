@@ -40,7 +40,7 @@ const App: FC = () => {
         <AddedFeatures car={car} />
       </div>
       <div className="box">
-        <AdditionalFeatures additionalFeatures={additionalFeatures} />
+        <AdditionalFeatures />
         <Total car={car} additionalPrice={additionalPrice} />
       </div>
     </div>
