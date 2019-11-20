@@ -8,12 +8,10 @@ type TotalProps = {
   readonly car: Car;
 };
 
-const Total: FunctionComponent<TotalProps> = ({ additionalPrice, car: { price } }) => {
-  return (
-    <div className="content">
-      <h4>Total Amount: ${price + additionalPrice}</h4>
-    </div>
-  );
-};
+const Total: FunctionComponent<TotalProps> = ({ additionalPrice, car: { price } }) => (
+  <div className="content">
+    <h4>Total Amount: ${price + additionalPrice}</h4>
+  </div>
+);
 
 export default Total;

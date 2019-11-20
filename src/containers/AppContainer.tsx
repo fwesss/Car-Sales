@@ -1,14 +1,14 @@
 // React
 import React, { FC } from 'react';
 // Components
-import Header from './components/Header';
-import AddedFeatures from './components/AddedFeatures';
-import AdditionalFeatures from './components/AdditionalFeatures';
-import Total from './components/Total';
+import Header from '../components/Header';
+import AddedFeatures from '../components/AddedFeatures';
+import AdditionalFeatures from '../components/AdditionalFeatures';
+import Total from '../components/Total';
 // Types
-import { Car, Feature } from './types';
+import { Car, Feature } from '../types';
 
-const App: FC = () => {
+const AppContainer: FC = () => {
   const { additionalFeatures, additionalPrice, car } = {
     additionalPrice: 0,
     car: {
@@ -29,7 +29,7 @@ const App: FC = () => {
     // dispatch an action here to remove an item
   };
 
-  const buyCar = (car: Car): void => {
+  const buyCar = (carToBuy: Car): void => {
     // dipsatch an action here to add an item
   };
 
@@ -47,4 +47,4 @@ const App: FC = () => {
   );
 };
 
-export default App;
+export default AppContainer;
