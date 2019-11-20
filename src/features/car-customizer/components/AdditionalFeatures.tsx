@@ -2,12 +2,12 @@
 import React, { FunctionComponent } from 'react';
 // Redux
 import { connect } from 'react-redux';
-// Actions
-import { addFeature } from '../actions/appActions';
+// Slices
+import { addFeature } from '../slices/featureSlice';
 // Components
 import AdditionalFeature from './AdditionalFeature';
 // Types
-import { Feature } from '../types';
+import { Feature } from '../../../types';
 
 type AdditionalFeaturesProps = {
   readonly additionalFeatures: readonly Feature[];

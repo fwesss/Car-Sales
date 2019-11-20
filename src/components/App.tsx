@@ -1,10 +1,10 @@
 // React
 import React, { FC } from 'react';
 // Components
-import Header from './Header';
-import AddedFeatures from './AddedFeatures';
-import AdditionalFeatures from './AdditionalFeatures';
-import Total from './Total';
+import Header from '../features/car-customizer/components/Header';
+import AddedFeatures from '../features/car-customizer/components/AddedFeatures';
+import AdditionalFeatures from '../features/car-customizer/components/AdditionalFeatures';
+import Total from '../features/car-customizer/components/Total';
 
 const App: FC = () => (
   <div className="boxes">

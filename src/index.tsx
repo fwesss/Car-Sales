@@ -2,23 +2,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 // Redux
-import { applyMiddleware, createStore } from 'redux';
+import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
 // Reducers
-import { featureReducer } from './reducers/featureReducer';
+import featureSlice from './features/car-customizer/slices/featureSlice';
 // Components
 import App from './components/App';
 // UI
 import 'bulma/css/bulma.css';
 import './styles.scss';
 
-const applicationStore = createStore(featureReducer, composeWithDevTools(applyMiddleware()));
+const store = configureStore({
+  reducer: featureSlice.reducer
+});
 
 const rootElement = document.getElementById('root');
 ReactDOM.render(
-  <Provider store={applicationStore}>
+  <Provider store={store}>
     <App />
   </Provider>,
   rootElement
 );
+
+export default store;

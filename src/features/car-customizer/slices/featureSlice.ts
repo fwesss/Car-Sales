@@ -1,9 +1,9 @@
-// Actions
-import { ADD_FEATURE, REMOVE_FEATURE } from '../actions/appActions';
+// Redux
+import { createSlice } from '@reduxjs/toolkit';
 // Types
-import { Feature } from '../types';
+import { Feature } from '../../../types';
 
-export const initialState = {
+const initialState = {
   additionalPrice: 0,
   car: {
     price: 26395,
@@ -30,18 +30,11 @@ type State = {
   readonly additionalFeatures: readonly Feature[];
 };
 
-type Action = {
-  readonly type: string;
-  readonly payload: {
-    readonly price: number;
-    readonly name: string;
-    readonly id: number;
-  };
-};
-
-export const featureReducer = (state: State = initialState, action: Action): State => {
-  switch (action.type) {
-    case ADD_FEATURE:
+const featureSlice = createSlice({
+  name: 'feature',
+  initialState: initialState as State,
+  reducers: {
+    addFeature(state, action) {
       return {
         ...state,
         additionalPrice: state.additionalPrice + action.payload.price,
@@ -53,7 +46,8 @@ export const featureReducer = (state: State = initialState, action: Action): Sta
           feature => feature.id !== action.payload.id
         )
       };
-    case REMOVE_FEATURE:
+    },
+    removeFeature(state, action) {
       return {
         ...state,
         additionalPrice: state.additionalPrice - action.payload.price,
@@ -63,7 +57,10 @@ export const featureReducer = (state: State = initialState, action: Action): Sta
         },
         additionalFeatures: [...state.additionalFeatures, action.payload]
       };
-    default:
-      return state;
+    }
   }
-};
+});
+
+export const { addFeature, removeFeature } = featureSlice.actions;
+
+export default featureSlice;

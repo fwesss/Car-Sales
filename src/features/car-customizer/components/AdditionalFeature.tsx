@@ -1,7 +1,7 @@
 // React
 import React, { FunctionComponent } from 'react';
 // Types
-import { Feature } from '../types';
+import { Feature } from '../../../types';
 
 type AdditionalFeatureProps = {
   readonly feature: Feature;

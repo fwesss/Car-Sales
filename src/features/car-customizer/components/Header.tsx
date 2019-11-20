@@ -3,7 +3,7 @@ import React, { FunctionComponent } from 'react';
 // Redux
 import { connect } from 'react-redux';
 // Types
-import { Car } from '../types';
+import { Car } from '../../../types';
 
 type HeaderProps = {
   readonly car: Car;
