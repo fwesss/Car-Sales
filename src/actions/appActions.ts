@@ -11,3 +11,12 @@ export const addFeature = (
     payload: feature
   };
 };
+
+export const removeFeature = (
+  feature: Feature
+): { readonly type: string; readonly payload: Feature } => {
+  return {
+    type: REMOVE_FEATURE,
+    payload: feature
+  };
+};

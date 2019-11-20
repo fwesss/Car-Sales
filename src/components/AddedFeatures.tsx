@@ -1,27 +1,52 @@
 // React
 import React, { FunctionComponent } from 'react';
+// Redux
+import { connect } from 'react-redux';
+// Actions
+import { removeFeature } from '../actions/appActions';
 // Components
 import AddedFeature from './AddedFeature';
 // Types
-import { Car } from '../types';
+import { Feature } from '../types';
 
 type AddedFeaturesProps = {
-  readonly car: Car;
+  readonly features: readonly Feature[];
+  readonly removeFeature: {
+    (feature: Feature): { readonly type: string; readonly payload: Feature };
+  };
 };
 
-const AddedFeatures: FunctionComponent<AddedFeaturesProps> = ({ car: { features } }) => (
-  <div className="content">
-    <h6>Added features:</h6>
-    {features.length ? (
-      <ol type="1">
-        {features.map(feature => (
-          <AddedFeature key={feature.id} feature={feature} />
-        ))}
-      </ol>
-    ) : (
-      <p>You can purchase items from the store.</p>
-    )}
-  </div>
-);
+const AddedFeatures: FunctionComponent<AddedFeaturesProps> = ({ features, removeFeature }) => {
+  const handleRemoveFeature = (
+    feature: Feature
+  ): { readonly type: string; readonly payload: Feature } => removeFeature(feature);
 
-export default AddedFeatures;
+  return (
+    <div className="content">
+      <h6>Added features:</h6>
+      {features.length ? (
+        <ol type="1">
+          {features.map(feature => (
+            <AddedFeature
+              key={feature.id}
+              feature={feature}
+              handleRemoveFeature={handleRemoveFeature}
+            />
+          ))}
+        </ol>
+      ) : (
+        <p>You can purchase items from the store.</p>
+      )}
+    </div>
+  );
+};
+
+const mapStateToProps = (state: {
+  readonly car: {
+    readonly features: readonly Feature[];
+  };
+}): { readonly features: readonly Feature[] } => ({
+  features: state.car.features
+});
+
+export default connect(mapStateToProps, { removeFeature })(AddedFeatures);

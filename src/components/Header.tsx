@@ -1,5 +1,7 @@
 // React
 import React, { FunctionComponent } from 'react';
+// Redux
+import { connect } from 'react-redux';
 // Types
 import { Car } from '../types';
 
@@ -17,4 +19,8 @@ const Header: FunctionComponent<HeaderProps> = ({ car }) => (
   </header>
 );
 
-export default Header;
+const mapStateToProps = (state: { readonly car: Car }): { readonly car: Car } => ({
+  car: state.car
+});
+
+export default connect(mapStateToProps, {})(Header);
