@@ -1,18 +1,20 @@
-import React from 'react';
-
+// React
+import React, { FC } from 'react';
+// Components
 import Header from './components/Header';
 import AddedFeatures from './components/AddedFeatures';
 import AdditionalFeatures from './components/AdditionalFeatures';
 import Total from './components/Total';
+// Types
+import { Car, Feature } from './types';
 
-const App = () => {
-  const state = {
+const App: FC = () => {
+  const { additionalFeatures, additionalPrice, car } = {
     additionalPrice: 0,
     car: {
       price: 26395,
       name: '2019 Ford Mustang',
-      image:
-        'https://cdn.motor1.com/images/mgl/0AN2V/s1/2019-ford-mustang-bullitt.jpg',
+      image: 'https://cdn.motor1.com/images/mgl/0AN2V/s1/2019-ford-mustang-bullitt.jpg',
       features: []
     },
     additionalFeatures: [
@@ -23,23 +25,23 @@ const App = () => {
     ]
   };
 
-  const removeFeature = item => {
+  const removeFeature = (feature: Feature): void => {
     // dispatch an action here to remove an item
   };
 
-  const buyItem = item => {
+  const buyCar = (car: Car): void => {
     // dipsatch an action here to add an item
   };
 
   return (
     <div className="boxes">
       <div className="box">
-        <Header car={state.car} />
-        <AddedFeatures car={state.car} />
+        <Header car={car} />
+        <AddedFeatures car={car} />
       </div>
       <div className="box">
-        <AdditionalFeatures additionalFeatures={state.additionalFeatures} />
-        <Total car={state.car} additionalPrice={state.additionalPrice} />
+        <AdditionalFeatures additionalFeatures={additionalFeatures} />
+        <Total car={car} additionalPrice={additionalPrice} />
       </div>
     </div>
   );
