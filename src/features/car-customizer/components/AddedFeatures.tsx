@@ -29,7 +29,7 @@ const AddedFeatures: FunctionComponent<AddedFeaturesProps> = ({ features, remove
           {features.map(feature => (
             <AddedFeature
               key={feature.id}
-              feature={feature}
+              id={feature.id}
               handleRemoveFeature={handleRemoveFeature}
             />
           ))}
