@@ -1,32 +1,31 @@
 // React
 import React, { FunctionComponent } from 'react';
 // Redux
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+// Reducers
+import { State, addFeature } from '../slices/featureSlice';
 // Types
 import { Feature } from '../../../types';
 
 type AdditionalFeatureProps = {
-  readonly feature: Feature | undefined;
-  readonly handleAddFeature: { (feature: Feature): void };
+  readonly id: number;
 };
 
-const AdditionalFeature: FunctionComponent<AdditionalFeatureProps> = ({
-  feature = { id: 0, name: 'feature', price: 0 },
-  handleAddFeature
-}) => (
-  <li>
-    <button type="button" className="button" onClick={() => handleAddFeature(feature)}>
-      Add
-    </button>
-    {feature.name} (+{feature.price})
-  </li>
-);
+const AdditionalFeature: FunctionComponent<AdditionalFeatureProps> = ({ id }) => {
+  const feature = useSelector<State, Feature | undefined>(state =>
+    state.additionalFeatures.find(additionalFeature => additionalFeature.id === id)
+  ) || { id: 0, name: 'additionalFeature', price: 0 };
 
-const mapStateToProps = (
-  state: { readonly additionalFeatures: readonly Feature[] },
-  { id }: { readonly id: number }
-): { readonly feature: Feature | undefined } => ({
-  feature: state.additionalFeatures.find(feature => feature.id === id)
-});
+  const dispatch = useDispatch();
 
-export default connect(mapStateToProps)(AdditionalFeature);
+  return (
+    <li>
+      <button type="button" className="button" onClick={() => dispatch(addFeature(feature))}>
+        Add
+      </button>
+      {feature.name} (+{feature.price})
+    </li>
+  );
+};
+
+export default AdditionalFeature;

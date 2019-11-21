@@ -1,25 +1,16 @@
 // React
-import React, { FunctionComponent } from 'react';
+import React, { FC } from 'react';
 // Redux
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 // Slices
-import { removeFeature } from '../slices/featureSlice';
+import { State } from '../slices/featureSlice';
 // Components
 import AddedFeature from './AddedFeature';
 // Types
 import { Feature } from '../../../types';
 
-type AddedFeaturesProps = {
-  readonly features: readonly Feature[];
-  readonly removeFeature: {
-    (feature: Feature): { readonly type: string; readonly payload: Feature };
-  };
-};
-
-const AddedFeatures: FunctionComponent<AddedFeaturesProps> = ({ features, removeFeature }) => {
-  const handleRemoveFeature = (
-    feature: Feature
-  ): { readonly type: string; readonly payload: Feature } => removeFeature(feature);
+const AddedFeatures: FC = () => {
+  const features = useSelector<State, readonly Feature[]>(state => state.car.features);
 
   return (
     <div className="content">
@@ -27,11 +18,7 @@ const AddedFeatures: FunctionComponent<AddedFeaturesProps> = ({ features, remove
       {features.length ? (
         <ol type="1">
           {features.map(feature => (
-            <AddedFeature
-              key={feature.id}
-              id={feature.id}
-              handleRemoveFeature={handleRemoveFeature}
-            />
+            <AddedFeature key={feature.id} id={feature.id} />
           ))}
         </ol>
       ) : (
@@ -41,12 +28,4 @@ const AddedFeatures: FunctionComponent<AddedFeaturesProps> = ({ features, remove
   );
 };
 
-const mapStateToProps = (state: {
-  readonly car: {
-    readonly features: readonly Feature[];
-  };
-}): { readonly features: readonly Feature[] } => ({
-  features: state.car.features
-});
-
-export default connect(mapStateToProps, { removeFeature })(AddedFeatures);
+export default AddedFeatures;

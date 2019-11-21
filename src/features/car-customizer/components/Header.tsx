@@ -1,26 +1,23 @@
 // React
-import React, { FunctionComponent } from 'react';
+import React, { FC } from 'react';
 // Redux
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 // Types
 import { Car } from '../../../types';
+import { State } from '../slices/featureSlice';
 
-type HeaderProps = {
-  readonly car: Car;
+const Header: FC = () => {
+  const car = useSelector<State, Car>(state => state.car);
+
+  return (
+    <header>
+      <figure className="image is-128x128">
+        <img src={car.image} alt={car.name} />
+      </figure>
+      <h2>{car.name}</h2>
+      <p>Amount: ${car.price}</p>
+    </header>
+  );
 };
 
-const Header: FunctionComponent<HeaderProps> = ({ car }) => (
-  <header>
-    <figure className="image is-128x128">
-      <img src={car.image} alt={car.name} />
-    </figure>
-    <h2>{car.name}</h2>
-    <p>Amount: ${car.price}</p>
-  </header>
-);
-
-const mapStateToProps = (state: { readonly car: Car }): { readonly car: Car } => ({
-  car: state.car
-});
-
-export default connect(mapStateToProps)(Header);
+export default Header;

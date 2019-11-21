@@ -19,7 +19,7 @@ const initialState = {
   ]
 };
 
-type State = {
+export type State = {
   readonly additionalPrice: number;
   readonly car: {
     readonly price: number;
@@ -42,9 +42,7 @@ const featureSlice = createSlice({
           ...state.car,
           features: [...state.car.features, action.payload]
         },
-        additionalFeatures: state.additionalFeatures.filter(
-          feature => feature.id !== action.payload.id
-        )
+        additionalFeatures: state.additionalFeatures.filter(feature => feature.id !== action.payload.id)
       };
     },
     removeFeature(state, action) {
