@@ -30,7 +30,7 @@ const AdditionalFeatures: FunctionComponent<AdditionalFeaturesProps> = ({
           {additionalFeatures.map(additionalFeature => (
             <AdditionalFeature
               key={additionalFeature.id}
-              feature={additionalFeature}
+              id={additionalFeature.id}
               handleAddFeature={handleAddFeature}
             />
           ))}

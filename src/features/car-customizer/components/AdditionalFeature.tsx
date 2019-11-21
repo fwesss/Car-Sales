@@ -1,15 +1,17 @@
 // React
 import React, { FunctionComponent } from 'react';
+// Redux
+import { connect } from 'react-redux';
 // Types
 import { Feature } from '../../../types';
 
 type AdditionalFeatureProps = {
-  readonly feature: Feature;
+  readonly feature: Feature | undefined;
   readonly handleAddFeature: { (feature: Feature): void };
 };
 
 const AdditionalFeature: FunctionComponent<AdditionalFeatureProps> = ({
-  feature,
+  feature = { id: 0, name: 'feature', price: 0 },
   handleAddFeature
 }) => (
   <li>
@@ -21,4 +23,11 @@ const AdditionalFeature: FunctionComponent<AdditionalFeatureProps> = ({
   </li>
 );
 
-export default AdditionalFeature;
+const mapStateToProps = (
+  state: { readonly additionalFeatures: readonly Feature[] },
+  { id }: { readonly id: number }
+): { readonly feature: Feature | undefined } => ({
+  feature: state.additionalFeatures.find(feature => feature.id === id)
+});
+
+export default connect(mapStateToProps)(AdditionalFeature);
