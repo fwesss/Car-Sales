@@ -23,4 +23,4 @@ const mapStateToProps = (state: { readonly car: Car }): { readonly car: Car } =>
   car: state.car
 });
 
-export default connect(mapStateToProps, {})(Header);
+export default connect(mapStateToProps)(Header);

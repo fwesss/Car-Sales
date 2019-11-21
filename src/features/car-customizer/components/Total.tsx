@@ -22,4 +22,4 @@ const mapStateToProps = (state: {
   price: state.car.price
 });
 
-export default connect(mapStateToProps, {})(Total);
+export default connect(mapStateToProps)(Total);
