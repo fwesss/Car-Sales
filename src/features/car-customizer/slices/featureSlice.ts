@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 // Types
 import { Feature } from '../../../types';
 
-const initialState = {
+const initialState: State = {
   additionalPrice: 0,
   car: {
     price: 26395,
@@ -32,7 +32,7 @@ export type State = {
 
 const featureSlice = createSlice({
   name: 'feature',
-  initialState: initialState as State,
+  initialState,
   reducers: {
     addFeature(state, action) {
       return {
